@@ -5,22 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Devocional Filho Restaurado</title>
   <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap");
+
     :root {
-      --bg-page: #F9F5EE;
-      --bg-card: #FFFFFF;
-      --bg-etapa: #FDF6E9;
-      --gold-dark: #A0722A;
-      --gold-mid: #C9933A;
-      --gold-light: #E8C97A;
-      --gold-pale: #FBF0DC;
-      --text-dark: #1C0F00;
-      --text-mid: #5C3D1E;
-      --text-light: #9C7A52;
-      --line: #EDE0C8;
-      --shadow-card: 0 2px 20px rgba(160, 114, 42, 0.10);
-      --shadow-soft: 0 1px 8px rgba(92, 61, 30, 0.08);
-      --shadow-player: 0 2px 12px rgba(92, 61, 30, 0.09);
-      --focus: 0 0 0 3px rgba(201, 147, 58, 0.18);
+      --bg-page: #F6F1E8;
+      --surface: #FFFFFF;
+      --surface-warm: #FFFCF7;
+      --soft-gold: #FFF7E6;
+      --soft-green: #EAF5EF;
+      --gold-dark: #8C6524;
+      --gold-mid: #B88A35;
+      --green: #1F6F50;
+      --green-hover: #18583F;
+      --text-main: #2A241E;
+      --title-main: #241F1A;
+      --text-muted: #6F6253;
+      --text-soft: #958775;
+      --border: rgba(31, 27, 22, 0.08);
+      --border-gold: rgba(184, 138, 53, 0.28);
+      --shadow-card: 0 18px 42px rgba(74, 54, 35, 0.10);
+      --shadow-soft: 0 10px 26px rgba(74, 54, 35, 0.075);
+      --shadow-cta: 0 14px 26px rgba(31, 111, 80, 0.22);
+      --focus: 0 0 0 4px rgba(31, 111, 80, 0.18);
     }
 
     * {
@@ -30,8 +36,8 @@
     html {
       min-width: 320px;
       background: var(--bg-page);
-      color: var(--text-dark);
-      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      color: var(--text-main);
+      font-family: "Inter", "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       font-size: 16px;
       scroll-behavior: smooth;
     }
@@ -40,9 +46,10 @@
       margin: 0;
       min-height: 100vh;
       background:
-        radial-gradient(circle at 50% -12rem, rgba(232, 201, 122, 0.24), transparent 26rem),
-        linear-gradient(180deg, #F5EDD8 0%, #F9F5EE 40%, #F9F5EE 100%);
-      color: var(--text-dark);
+        radial-gradient(circle at 18% -10rem, rgba(184, 138, 53, 0.18), transparent 24rem),
+        radial-gradient(circle at 100% 6rem, rgba(31, 111, 80, 0.12), transparent 20rem),
+        linear-gradient(180deg, #FBF7EF 0%, #F6F1E8 48%, #F6F1E8 100%);
+      color: var(--text-main);
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
     }
@@ -80,10 +87,10 @@
 
     .app {
       width: 100%;
-      max-width: 480px;
+      max-width: 500px;
       min-height: 100vh;
       margin: 0 auto;
-      padding: 28px 20px 34px;
+      padding: 22px 20px 34px;
       overflow-x: hidden;
     }
 
@@ -109,73 +116,89 @@
       display: grid;
       justify-items: center;
       gap: 0;
-      padding-top: 2px;
+      padding-top: 0;
       text-align: center;
     }
 
     .brand__logo {
-      width: 230px;
-      max-width: 78vw;
-      max-height: 132px;
+      width: 132px;
+      max-width: 42vw;
+      max-height: 88px;
+      padding: 8px 10px;
       object-fit: contain;
-      background: transparent;
-      border: 0;
-      box-shadow: none;
-      mix-blend-mode: multiply;
+      background: rgba(255, 255, 255, 0.58);
+      border: 1px solid rgba(255, 255, 255, 0.62);
+      border-radius: 22px;
+      box-shadow: 0 10px 26px rgba(74, 54, 35, 0.055);
     }
 
     .brand__logo--small {
-      width: 180px;
-      max-width: 52vw;
-      max-height: 104px;
+      width: 94px;
+      max-width: 30vw;
+      max-height: 70px;
+      padding: 6px 8px;
+      border-radius: 18px;
     }
 
     .brand__text {
       margin: 8px 0 0;
-      color: var(--text-light);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
+      color: var(--text-soft);
+      font-size: 10px;
+      font-family: "Poppins", sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.16em;
       line-height: 1.4;
       text-transform: uppercase;
     }
 
     .hero {
-      padding: 0 2px 28px;
+      padding: 0 2px 22px;
       text-align: center;
     }
 
     .hero h1,
     .list-heading h1,
     .modal-title h2,
-    .devotional-card h2 {
-      font-family: Georgia, "Times New Roman", serif;
-      font-weight: normal;
+    .devotional-card h2,
+    .stage-name {
+      font-family: "Poppins", sans-serif;
+      font-weight: 800;
     }
 
     .hero h1 {
-      max-width: 330px;
+      max-width: 360px;
       margin: 32px auto 12px;
-      color: var(--gold-dark);
-      font-size: 24px;
-      line-height: 1.4;
+      color: var(--title-main);
+      font-size: clamp(2rem, 9vw, 2.85rem);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
     }
 
     .hero p {
-      max-width: 280px;
+      max-width: 335px;
       margin: 0 auto;
-      color: var(--text-mid);
-      font-size: 14px;
-      line-height: 1.7;
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .hero__support {
+      display: block;
+      max-width: 300px;
+      margin: 10px auto 0;
+      color: var(--text-soft);
+      font-size: 13px;
+      line-height: 1.55;
     }
 
     .devotional-card {
       position: relative;
       overflow: hidden;
-      border: 0;
-      border-radius: 20px;
-      background: var(--bg-card);
-      box-shadow: var(--shadow-card);
+      border: 1px solid var(--border);
+      border-radius: 32px;
+      background: var(--surface);
+      box-shadow: 0 18px 46px rgba(74, 54, 35, 0.09);
     }
 
     .devotional-card__badge {
@@ -184,56 +207,74 @@
       right: 14px;
       z-index: 1;
       min-height: 0;
-      padding: 4px 12px;
+      padding: 6px 12px;
       border: 0;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(4px);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(10px);
       color: var(--gold-dark);
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.05em;
+      font-size: 11px;
+      font-family: "Poppins", sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.08em;
       line-height: 1.5;
       box-shadow: 0 2px 10px rgba(160, 114, 42, 0.10);
     }
 
     .devotional-card__cover {
       width: 100%;
-      max-height: 430px;
-      border-radius: 16px 16px 0 0;
-      background: var(--bg-etapa);
+      height: clamp(230px, 68vw, 330px);
+      max-height: 330px;
+      border-radius: 0;
+      background: var(--soft-gold);
       object-fit: cover;
+      object-position: center 35%;
     }
 
     .devotional-card__content {
-      padding: 20px 24px 24px;
-      text-align: center;
+      padding: 24px 22px 24px;
+      text-align: left;
     }
 
     .devotional-card h2 {
-      margin: 0 0 4px;
-      color: var(--text-dark);
-      font-size: 18px;
-      line-height: 1.32;
+      margin: 0 0 6px;
+      color: var(--title-main);
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.14;
+      letter-spacing: -0.035em;
     }
 
     .devotional-card p {
-      margin: 0 0 16px;
-      color: var(--text-light);
-      font-size: 13px;
-      line-height: 1.5;
+      margin: 0 0 12px;
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .devotional-card__note {
+      color: var(--text-soft);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .card-actions {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
     }
 
     .button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 7px;
+      gap: 9px;
       width: 100%;
       border-radius: 12px;
       cursor: pointer;
       font-size: 15px;
-      font-weight: 500;
+      font-family: "Poppins", sans-serif;
+      font-weight: 600;
       letter-spacing: 0.02em;
       text-align: center;
       text-decoration: none;
@@ -249,36 +290,75 @@
     }
 
     .button--gold {
-      min-height: 48px;
-      padding: 13px 18px;
+      min-height: 54px;
+      padding: 15px 18px;
       border: 0;
-      background: linear-gradient(135deg, #C9933A, #A0722A);
+      border-radius: 18px;
+      background: var(--green);
       color: #FFFFFF;
-      box-shadow: 0 4px 14px rgba(160, 114, 42, 0.30);
+      box-shadow: var(--shadow-cta);
+      font-weight: 700;
     }
 
-    .button--gold::first-letter {
-      color: rgba(255, 255, 255, 0.8);
+    .button--gold:hover {
+      background: var(--green-hover);
     }
 
     .button--outline {
-      min-height: 44px;
+      min-height: 52px;
       padding: 11px 16px;
-      border: 1.5px solid var(--gold-mid);
-      background: transparent;
+      border: 1px solid rgba(184, 138, 53, 0.45);
+      border-radius: 18px;
+      background: var(--soft-gold);
       color: var(--gold-dark);
       box-shadow: none;
       font-size: 14px;
+      font-weight: 700;
+    }
+
+    .button--outline:hover {
+      background: #F2E2BD;
+      border-color: rgba(184, 138, 53, 0.40);
+    }
+
+    .button--whatsapp {
+      min-height: 52px;
+      padding: 11px 16px;
+      border: 1px solid rgba(31, 111, 80, 0.22);
+      border-radius: 18px;
+      background: var(--soft-green);
+      color: var(--green);
+      box-shadow: none;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .button--whatsapp:hover {
+      background: #DCEFE6;
+      border-color: rgba(31, 111, 80, 0.32);
+    }
+
+    .button__icon {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 18px;
+      object-fit: contain;
+    }
+
+    .button--gold .button__icon {
+      filter: brightness(0) invert(1);
     }
 
     .pdf-action {
-      margin: 12px 0 34px;
+      margin: 0;
     }
 
     .footer {
+      margin-top: 26px;
       padding: 6px 0 2px;
-      color: rgba(156, 122, 82, 0.72);
-      font-size: 12px;
+      color: var(--text-soft);
+      font-size: 11px;
+      font-family: "Inter", sans-serif;
       line-height: 1.6;
       text-align: center;
     }
@@ -287,8 +367,8 @@
       position: relative;
       display: grid;
       align-items: start;
-      min-height: 104px;
-      margin-bottom: 6px;
+      min-height: 60px;
+      margin-bottom: 14px;
     }
 
     .back-button {
@@ -302,40 +382,72 @@
       color: var(--gold-dark);
       cursor: pointer;
       font-size: 14px;
-      font-weight: 500;
+      font-family: "Poppins", sans-serif;
+      font-weight: 600;
       line-height: 1.2;
       box-shadow: none;
       transition: transform 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
     }
 
     .list-heading {
-      padding: 12px 0 16px;
-      text-align: center;
+      padding: 8px 0 18px;
+      text-align: left;
     }
 
     .list-heading h1 {
-      margin: 0 0 6px;
-      color: var(--gold-dark);
-      font-size: 22px;
-      line-height: 1.3;
+      max-width: 330px;
+      margin: 0 0 10px;
+      color: var(--text-main);
+      font-size: clamp(1.9rem, 8vw, 2.45rem);
+      line-height: 1.05;
+      letter-spacing: -0.045em;
     }
 
     .list-heading p {
-      margin: 0;
-      color: var(--text-light);
-      font-size: 13px;
+      max-width: 360px;
+      margin: 0 0 8px;
+      color: var(--text-muted);
+      font-size: 14px;
       line-height: 1.6;
     }
 
+    .list-heading__hint {
+      color: var(--text-soft) !important;
+      font-size: 13px !important;
+    }
+
+    .prayer-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 4px 0 18px;
+    }
+
+    .prayer-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--text-muted);
+      font-size: 12px;
+      font-family: "Poppins", sans-serif;
+      font-weight: 600;
+      box-shadow: 0 8px 22px rgba(31, 27, 22, 0.05);
+    }
+
     .stage-separator {
-      margin: 20px 0 10px;
-      padding: 12px 16px;
-      border: 1px solid rgba(200, 147, 58, 0.20);
-      border-radius: 12px;
-      background: var(--bg-etapa);
+      margin: 28px 0 12px;
+      padding: 16px;
+      border: 1px solid var(--border-gold);
+      border-radius: 22px;
+      background:
+        linear-gradient(135deg, rgba(255, 247, 230, 0.96), rgba(255, 255, 255, 0.88));
       color: var(--gold-dark);
-      text-align: center;
-      box-shadow: 0 1px 10px rgba(160, 114, 42, 0.05);
+      text-align: left;
+      box-shadow: 0 12px 28px rgba(31, 27, 22, 0.06);
     }
 
     .stage-separator strong {
@@ -343,46 +455,84 @@
       margin-bottom: 2px;
       color: var(--gold-dark);
       font-size: 12px;
+      font-family: "Poppins", sans-serif;
       font-weight: 600;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.02em;
       line-height: 1.4;
     }
 
-    .stage-separator strong::first-letter {
-      opacity: 0.6;
+    .stage-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+      color: var(--gold-dark);
+      font-size: 12px;
+      font-family: "Poppins", sans-serif;
+      font-weight: 700;
+    }
+
+    .stage-kicker::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gold-mid);
+      box-shadow: 0 0 0 4px rgba(184, 138, 53, 0.14);
+    }
+
+    .stage-name {
+      margin: 0 0 4px;
+      color: var(--text-main);
+      font-size: 20px;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
     }
 
     .stage-separator span {
       display: block;
-      margin-top: 2px;
-      color: var(--text-light);
-      font-size: 12px;
-      line-height: 1.4;
+      margin-top: 0;
+      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .stage-description {
+      display: block;
+      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.45;
     }
 
     .days-list {
       display: grid;
-      gap: 8px;
+      gap: 12px;
       padding-bottom: 26px;
     }
 
     .day-card {
       display: grid;
-      grid-template-columns: 36px 1fr auto;
-      gap: 12px;
+      grid-template-columns: 42px 1fr 36px;
+      gap: 14px;
       align-items: center;
       width: 100%;
       min-height: 0;
       height: auto;
-      padding: 14px 16px;
-      border: 0;
-      border-radius: 14px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
       background: #FFFFFF;
-      color: var(--text-dark);
+      color: var(--text-main);
       cursor: pointer;
       text-align: left;
       box-shadow: var(--shadow-soft);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .day-card:hover {
+      transform: translateY(-1px);
+      border-color: rgba(31, 111, 80, 0.18);
+      box-shadow: 0 14px 32px rgba(74, 54, 35, 0.095);
     }
 
     .day-card:focus-visible {
@@ -393,47 +543,59 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 36px;
-      height: 36px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #C9933A, #A0722A);
+      background: var(--gold-mid);
       color: #FFFFFF;
       font-size: 13px;
+      font-family: "Poppins", sans-serif;
       font-weight: 600;
       letter-spacing: 0.03em;
     }
 
     .day-card__title {
-      color: var(--text-dark);
+      color: var(--title-main);
       font-size: 15px;
+      font-family: "Poppins", sans-serif;
       font-weight: 500;
-      line-height: 1.3;
+      line-height: 1.32;
     }
 
     .day-card__play {
-      color: var(--gold-light);
-      font-size: 14px;
-      opacity: 0.7;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--soft-green);
+      color: var(--green);
+      font-size: 13px;
+      opacity: 1;
     }
 
     .modal {
       position: fixed;
       inset: 0;
       z-index: 20;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
       width: 100vw;
       height: 100vh;
-      overflow-y: auto;
-      background: #F9F5EE;
+      padding: 16px 12px;
+      overflow: hidden;
+      background: rgba(36, 31, 26, 0.48);
+      backdrop-filter: blur(10px);
       opacity: 0;
-      transform: translateY(8px);
       visibility: hidden;
       pointer-events: none;
-      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
+      transition: opacity 0.22s ease, visibility 0s linear 0.22s;
     }
 
     .modal.is-open {
       opacity: 1;
-      transform: translateY(0);
       visibility: visible;
       pointer-events: auto;
       transition-delay: 0s;
@@ -441,10 +603,25 @@
 
     .modal__inner {
       width: 100%;
-      max-width: 480px;
-      min-height: 100vh;
+      max-width: 620px;
+      height: min(92vh, 820px);
+      min-height: 0;
       margin: 0 auto;
       padding: 0 20px 28px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      border: 1px solid rgba(255, 255, 255, 0.64);
+      border-radius: 32px 32px 26px 26px;
+      background:
+        radial-gradient(circle at 18% -8rem, rgba(184, 138, 53, 0.14), transparent 20rem),
+        var(--bg-page);
+      box-shadow: 0 28px 80px rgba(36, 31, 26, 0.28);
+      transform: translateY(18px) scale(0.985);
+      transition: transform 0.24s ease;
+    }
+
+    .modal.is-open .modal__inner {
+      transform: translateY(0) scale(1);
     }
 
     .modal-top {
@@ -452,37 +629,43 @@
       top: 0;
       z-index: 2;
       display: grid;
-      grid-template-columns: 1fr 40px;
-      gap: 10px;
-      align-items: center;
+      grid-template-columns: 1fr 42px;
+      gap: 12px;
+      align-items: start;
       min-height: 56px;
       margin: 0 -20px 18px;
-      padding: 16px 20px;
-      background: rgba(249, 245, 238, 0.94);
+      padding: 18px 20px 16px;
+      background: rgba(255, 252, 247, 0.90);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(237, 224, 200, 0.72);
+      border-bottom: 1px solid var(--border);
     }
 
     .modal-stage {
-      justify-self: center;
-      margin-left: 40px;
-      color: var(--text-light);
+      justify-self: start;
+      margin: 0 0 8px;
+      color: var(--text-soft);
       font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.15em;
+      font-family: "Poppins", sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.08em;
       line-height: 1.4;
       text-align: center;
       text-transform: uppercase;
     }
 
+    .modal-heading-group {
+      min-width: 0;
+    }
+
     .close-button {
       justify-self: end;
-      min-width: 40px;
-      min-height: 40px;
+      min-width: 42px;
+      min-height: 42px;
       padding: 0;
       border: 0;
-      background: transparent;
-      color: var(--text-light);
+      border-radius: 50%;
+      background: rgba(42, 36, 30, 0.06);
+      color: var(--text-soft);
       cursor: pointer;
       font-size: 0;
       font-weight: 400;
@@ -497,33 +680,54 @@
     }
 
     .modal-title {
-      padding: 4px 0 20px;
-      text-align: center;
+      padding: 0;
+      text-align: left;
     }
 
     .modal-title .eyebrow {
       margin: 0 0 8px;
-      color: var(--gold-mid);
+      color: var(--green);
       font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
+      font-family: "Poppins", sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.14em;
       line-height: 1.4;
       text-transform: uppercase;
     }
 
     .modal-title h2 {
-      margin: 0 auto;
-      max-width: 340px;
-      color: var(--text-dark);
-      font-size: 22px;
-      line-height: 1.3;
+      margin: 0;
+      max-width: 430px;
+      color: var(--title-main);
+      font-size: 23px;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.035em;
     }
 
     .player {
+      position: relative;
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 14px;
+      align-items: center;
       padding: 20px;
-      border-radius: 16px;
-      background: #FFFFFF;
+      border: 1px solid rgba(31, 111, 80, 0.12);
+      border-radius: 24px;
+      background:
+        linear-gradient(135deg, rgba(234, 245, 239, 0.98), rgba(255, 255, 255, 0.98));
       box-shadow: var(--shadow-player);
+    }
+
+    .player::before {
+      content: "Áudio do dia";
+      grid-column: 1 / -1;
+      color: var(--green);
+      font-family: "Poppins", sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     .icon-button {
@@ -536,22 +740,23 @@
     }
 
     .play-button {
-      width: 52px;
-      height: 52px;
-      margin: 0 auto 18px;
+      grid-row: span 2;
+      width: 56px;
+      height: 56px;
+      margin: 0;
       border-radius: 50%;
-      background: linear-gradient(135deg, #C9933A, #A0722A);
+      background: var(--green);
       color: #FFFFFF;
       font-size: 20px;
       line-height: 1;
-      box-shadow: 0 4px 14px rgba(160, 114, 42, 0.26);
+      box-shadow: 0 12px 24px rgba(31, 111, 80, 0.22);
     }
 
     .progress {
       position: relative;
       width: 100%;
-      height: 15px;
-      margin: 2px 0 9px;
+      height: 18px;
+      margin: 0;
       padding: 6px 0;
       border: 0;
       background: transparent;
@@ -563,10 +768,10 @@
       left: 0;
       right: 0;
       top: 6px;
-      height: 3px;
+      height: 6px;
       overflow: hidden;
-      border-radius: 2px;
-      background: #E8D5B0;
+      border-radius: 999px;
+      background: #E6DED2;
     }
 
     .progress__fill {
@@ -574,7 +779,7 @@
       width: 0%;
       height: 100%;
       border-radius: inherit;
-      background: var(--gold-mid);
+      background: var(--green);
       transition: width 0.12s linear;
     }
 
@@ -583,7 +788,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 14px;
-      color: var(--text-light);
+      color: var(--text-muted);
       font-size: 12px;
       font-variant-numeric: tabular-nums;
       line-height: 1.4;
@@ -592,14 +797,15 @@
     .speed-button {
       min-width: 0;
       min-height: 0;
-      padding: 2px 8px;
-      border: 1px solid var(--gold-light);
-      border-radius: 6px;
-      background: transparent;
-      color: var(--text-mid);
+      padding: 4px 10px;
+      border: 1px solid rgba(31, 111, 80, 0.18);
+      border-radius: 999px;
+      background: var(--soft-green);
+      color: var(--green);
       cursor: pointer;
       font-size: 12px;
-      font-weight: 500;
+      font-family: "Poppins", sans-serif;
+      font-weight: 600;
       line-height: 1.4;
       transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
@@ -608,23 +814,29 @@
       height: 1px;
       margin: 20px 0;
       overflow: hidden;
-      border-top: 1px solid var(--line);
+      border-top: 1px solid var(--border);
       color: transparent;
       font-size: 0;
       text-align: center;
     }
 
     .content-block {
-      margin-bottom: 24px;
+      margin-bottom: 18px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: 0 10px 26px rgba(74, 54, 35, 0.045);
     }
 
     .label {
       display: block;
       margin: 0 0 12px;
-      color: var(--text-light);
+      color: var(--text-soft);
       font-size: 10px;
+      font-family: "Poppins", sans-serif;
       font-weight: 500;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.08em;
       line-height: 1.5;
       text-transform: uppercase;
     }
@@ -632,11 +844,11 @@
     .verse {
       margin: 0;
       padding: 12px 16px;
-      border-left: 3px solid var(--gold-mid);
-      border-radius: 0 8px 8px 0;
-      background: #FDF6E9;
-      color: var(--text-dark);
-      font-family: Georgia, "Times New Roman", serif;
+      border-left: 3px solid var(--green);
+      border-radius: 0 14px 14px 0;
+      background: rgba(234, 245, 239, 0.58);
+      color: var(--text-main);
+      font-family: "Inter", sans-serif;
       font-size: 15px;
       font-style: italic;
       font-weight: normal;
@@ -644,7 +856,7 @@
     }
 
     .prayer-text {
-      color: var(--text-dark);
+      color: var(--text-main);
       font-size: 16px;
       line-height: 1.85;
     }
@@ -657,7 +869,8 @@
       margin: 24px 0;
       padding: 20px;
       border-radius: 14px;
-      background: var(--gold-pale);
+      border: 1px solid rgba(184, 138, 53, 0.20);
+      background: var(--soft-gold);
       color: var(--gold-dark);
       text-align: center;
     }
@@ -670,7 +883,7 @@
     .declaration p {
       margin: 0;
       color: var(--gold-dark);
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: "Inter", sans-serif;
       font-size: 15px;
       font-style: italic;
       font-weight: normal;
@@ -706,7 +919,7 @@
 
     .nav-button.is-highlighted:not(:disabled) {
       border-color: transparent;
-      background: linear-gradient(135deg, #C9933A, #A0722A);
+      background: linear-gradient(135deg, #357A5B, #2F6B4F);
       color: #FFFFFF;
       box-shadow: 0 4px 14px rgba(160, 114, 42, 0.24);
     }
@@ -737,34 +950,60 @@
         padding-right: 24px;
       }
     }
+
+    @media (min-width: 720px) {
+      .modal {
+        align-items: center;
+        padding: 28px;
+      }
+
+      .modal__inner {
+        max-width: 660px;
+        height: min(88vh, 820px);
+        border-radius: 32px;
+      }
+    }
   </style>
 </head>
 <body>
   <main class="app">
     <section class="screen is-active" id="home-screen" aria-labelledby="home-title">
       <header class="brand" aria-label="Mães da Oração">
-        <img class="brand__logo" src="Logo/logo.png.png" alt="Logo Mães da Oração">
+        <img class="brand__logo" src="Logo/logo2.png" alt="Logo Mães da Oração">
         <p class="brand__text">Mães da Oração</p>
       </header>
 
       <section class="hero">
         <h1 id="home-title">Sua jornada de intercessão começa aqui</h1>
-        <p>Clique no devocional abaixo para ouvir e acompanhar cada oração guiada</p>
+        <p>21 dias de orações guiadas para entregar seu filho a Deus com direção, fé e esperança.</p>
+        <span class="hero__support">Ouça cada oração, acompanhe pelo devocional e avance um dia de cada vez.</span>
       </section>
 
       <article class="devotional-card">
         <span class="devotional-card__badge">21 dias</span>
-        <img class="devotional-card__cover" src="Capa Devocional/Capa.png" alt="Capa do Devocional Filho Restaurado">
+        <img class="devotional-card__cover" src="Capa Devocional/capa-nova.png" alt="Capa do Devocional Filho Restaurado">
         <div class="devotional-card__content">
           <h2>Devocional Filho Restaurado</h2>
-          <p>21 Dias de Oração Guiada</p>
-          <button class="button button--gold" id="open-prayers" type="button">▶ Acessar as Orações</button>
+          <p>21 dias de oração guiada pelo filho que está longe de Deus</p>
+          <div class="devotional-card__note">Comece pelo Dia 1 e caminhe com Deus em cada etapa da restauração.</div>
+          <div class="card-actions">
+            <button class="button button--gold" id="open-prayers" type="button">
+              <img class="button__icon" src="Icones/play-button.png" alt="" aria-hidden="true">
+              Orações Guiadas em Áudio
+            </button>
+            <div class="pdf-action">
+              <a class="button button--outline" href="Entregável PDF/Devocional Filho Restaurado - 21 Dias.pdf" target="_blank" rel="noopener">
+                <img class="button__icon" src="Icones/download-pdf.png" alt="" aria-hidden="true">
+                Baixar Devocional em PDF
+              </a>
+            </div>
+            <a class="button button--whatsapp" href="https://chat.whatsapp.com/KJaPd6qdQ36239mC49Hks6" target="_blank" rel="noopener">
+              <img class="button__icon" src="Icones/whatsapp.png" alt="" aria-hidden="true">
+              Acesse o grupo do WhatsApp
+            </a>
+          </div>
         </div>
       </article>
-
-      <div class="pdf-action">
-        <a class="button button--outline" href="Entregável PDF/Devocional Filho Restaurado - 21 Dias.pdf" target="_blank" rel="noopener">⬇ Baixar Devocional em PDF</a>
-      </div>
 
       <footer class="footer">© Mães da Oração — Todos os direitos reservados</footer>
     </section>
@@ -773,14 +1012,21 @@
       <div class="top-row">
         <button class="back-button" id="back-home" type="button">← Voltar</button>
         <header class="brand" aria-label="Mães da Oração">
-          <img class="brand__logo brand__logo--small" src="Logo/logo.png.png" alt="Logo Mães da Oração">
+          <img class="brand__logo brand__logo--small" src="Logo/logo2.png" alt="Logo Mães da Oração">
         </header>
       </div>
 
       <section class="list-heading">
-        <h1 id="prayers-title">Orações Guiadas</h1>
-        <p>Toque em um dia para ouvir e acompanhar</p>
+        <h1 id="prayers-title">Escolha a oração de hoje</h1>
+        <p>Cada dia guia seu coração por uma etapa da restauração.</p>
+        <p class="list-heading__hint">Toque em uma oração para ouvir e acompanhar.</p>
       </section>
+
+      <div class="prayer-chips" aria-label="Resumo do devocional">
+        <span class="prayer-chip">21 dias</span>
+        <span class="prayer-chip">3 etapas</span>
+        <span class="prayer-chip">Orações guiadas</span>
+      </div>
 
       <div class="days-list" id="days-list"></div>
     </section>
@@ -789,14 +1035,15 @@
   <section class="modal" id="prayer-modal" aria-hidden="true" aria-labelledby="modal-heading" role="dialog">
     <div class="modal__inner" id="modal-scroll">
       <div class="modal-top">
-        <div class="modal-stage" id="modal-stage">ETAPA</div>
+        <div class="modal-heading-group">
+          <div class="modal-stage" id="modal-stage">ETAPA</div>
+          <section class="modal-title">
+            <p class="eyebrow" id="modal-day">DIA 01</p>
+            <h2 id="modal-heading">Título da oração</h2>
+          </section>
+        </div>
         <button class="close-button" id="close-modal" type="button">✕ Fechar</button>
       </div>
-
-      <section class="modal-title">
-        <p class="eyebrow" id="modal-day">DIA 01</p>
-        <h2 id="modal-heading">Título da oração</h2>
-      </section>
 
       <section class="player" aria-label="Player de áudio da oração">
         <button class="icon-button play-button" id="play-toggle" type="button" aria-label="Reproduzir oração">▶</button>
@@ -839,9 +1086,33 @@
   <script src="oracoes_texto.js"></script>
   <script>
     const stages = [
-      { start: 1, end: 7, title: "ETAPA 1 • A MÃE", days: "Dias 1 ao 7" },
-      { start: 8, end: 14, title: "ETAPA 2 • O FILHO", days: "Dias 8 ao 14" },
-      { start: 15, end: 21, title: "ETAPA 3 • A RESTAURAÇÃO", days: "Dias 15 ao 21" }
+      {
+        start: 1,
+        end: 7,
+        title: "Etapa 1 • A Mãe",
+        label: "Etapa 1",
+        name: "A Mãe",
+        days: "Dias 1 ao 7",
+        description: "Deus cuida do coração da mãe."
+      },
+      {
+        start: 8,
+        end: 14,
+        title: "Etapa 2 • O Filho",
+        label: "Etapa 2",
+        name: "O Filho",
+        days: "Dias 8 ao 14",
+        description: "Orações pela mente, coração e propósito dele."
+      },
+      {
+        start: 15,
+        end: 21,
+        title: "Etapa 3 • A Restauração",
+        label: "Etapa 3",
+        name: "A Restauração",
+        days: "Dias 15 ao 21",
+        description: "Fé, reconciliação e declaração final."
+      }
     ];
 
     const audioFiles = {
@@ -917,7 +1188,11 @@
       stages.forEach((stage) => {
         const separator = document.createElement("div");
         separator.className = "stage-separator";
-        separator.innerHTML = `<strong>✦ ${stage.title} ✦</strong><span>${stage.days}</span>`;
+        separator.innerHTML = `
+          <strong class="stage-kicker">${stage.label}</strong>
+          <div class="stage-name">${stage.name}</div>
+          <span>${stage.days} • ${stage.description}</span>
+        `;
         fragment.appendChild(separator);
 
         oracoes
@@ -1017,6 +1292,11 @@
     document.getElementById("open-prayers").addEventListener("click", () => setScreen("prayers"));
     document.getElementById("back-home").addEventListener("click", () => setScreen("home"));
     document.getElementById("close-modal").addEventListener("click", closeModal);
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
 
     playToggle.addEventListener("click", async () => {
       if (audio.paused) {
