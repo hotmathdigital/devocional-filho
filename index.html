@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Devocional Filho Restaurado</title>
+  <style>
+    :root {
+      --bg-page: #F9F5EE;
+      --bg-card: #FFFFFF;
+      --bg-etapa: #FDF6E9;
+      --gold-dark: #A0722A;
+      --gold-mid: #C9933A;
+      --gold-light: #E8C97A;
+      --gold-pale: #FBF0DC;
+      --text-dark: #1C0F00;
+      --text-mid: #5C3D1E;
+      --text-light: #9C7A52;
+      --line: #EDE0C8;
+      --shadow-card: 0 2px 20px rgba(160, 114, 42, 0.10);
+      --shadow-soft: 0 1px 8px rgba(92, 61, 30, 0.08);
+      --shadow-player: 0 2px 12px rgba(92, 61, 30, 0.09);
+      --focus: 0 0 0 3px rgba(201, 147, 58, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-width: 320px;
+      background: var(--bg-page);
+      color: var(--text-dark);
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 50% -12rem, rgba(232, 201, 122, 0.24), transparent 26rem),
+        linear-gradient(180deg, #F5EDD8 0%, #F9F5EE 40%, #F9F5EE 100%);
+      color: var(--text-dark);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    button,
+    a,
+    .progress {
+      outline: none;
+    }
+
+    button:focus-visible,
+    a:focus-visible,
+    .progress:focus-visible {
+      box-shadow: var(--focus);
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      object-fit: cover;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 480px;
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: 28px 20px 34px;
+      overflow-x: hidden;
+    }
+
+    .screen {
+      display: none;
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    .screen.is-active {
+      display: block;
+      animation: screenIn 0.2s ease forwards;
+    }
+
+    @keyframes screenIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .brand {
+      display: grid;
+      justify-items: center;
+      gap: 0;
+      padding-top: 2px;
+      text-align: center;
+    }
+
+    .brand__logo {
+      width: 230px;
+      max-width: 78vw;
+      max-height: 132px;
+      object-fit: contain;
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+      mix-blend-mode: multiply;
+    }
+
+    .brand__logo--small {
+      width: 180px;
+      max-width: 52vw;
+      max-height: 104px;
+    }
+
+    .brand__text {
+      margin: 8px 0 0;
+      color: var(--text-light);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+
+    .hero {
+      padding: 0 2px 28px;
+      text-align: center;
+    }
+
+    .hero h1,
+    .list-heading h1,
+    .modal-title h2,
+    .devotional-card h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: normal;
+    }
+
+    .hero h1 {
+      max-width: 330px;
+      margin: 32px auto 12px;
+      color: var(--gold-dark);
+      font-size: 24px;
+      line-height: 1.4;
+    }
+
+    .hero p {
+      max-width: 280px;
+      margin: 0 auto;
+      color: var(--text-mid);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .devotional-card {
+      position: relative;
+      overflow: hidden;
+      border: 0;
+      border-radius: 20px;
+      background: var(--bg-card);
+      box-shadow: var(--shadow-card);
+    }
+
+    .devotional-card__badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 1;
+      min-height: 0;
+      padding: 4px 12px;
+      border: 0;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(4px);
+      color: var(--gold-dark);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      line-height: 1.5;
+      box-shadow: 0 2px 10px rgba(160, 114, 42, 0.10);
+    }
+
+    .devotional-card__cover {
+      width: 100%;
+      max-height: 430px;
+      border-radius: 16px 16px 0 0;
+      background: var(--bg-etapa);
+      object-fit: cover;
+    }
+
+    .devotional-card__content {
+      padding: 20px 24px 24px;
+      text-align: center;
+    }
+
+    .devotional-card h2 {
+      margin: 0 0 4px;
+      color: var(--text-dark);
+      font-size: 18px;
+      line-height: 1.32;
+    }
+
+    .devotional-card p {
+      margin: 0 0 16px;
+      color: var(--text-light);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      width: 100%;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-align: center;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .button:active,
+    .day-card:active,
+    .icon-button:active,
+    .speed-button:active,
+    .nav-button:active {
+      transform: scale(0.985);
+    }
+
+    .button--gold {
+      min-height: 48px;
+      padding: 13px 18px;
+      border: 0;
+      background: linear-gradient(135deg, #C9933A, #A0722A);
+      color: #FFFFFF;
+      box-shadow: 0 4px 14px rgba(160, 114, 42, 0.30);
+    }
+
+    .button--gold::first-letter {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .button--outline {
+      min-height: 44px;
+      padding: 11px 16px;
+      border: 1.5px solid var(--gold-mid);
+      background: transparent;
+      color: var(--gold-dark);
+      box-shadow: none;
+      font-size: 14px;
+    }
+
+    .pdf-action {
+      margin: 12px 0 34px;
+    }
+
+    .footer {
+      padding: 6px 0 2px;
+      color: rgba(156, 122, 82, 0.72);
+      font-size: 12px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .top-row {
+      position: relative;
+      display: grid;
+      align-items: start;
+      min-height: 104px;
+      margin-bottom: 6px;
+    }
+
+    .back-button {
+      position: absolute;
+      left: 0;
+      top: 0;
+      min-height: 36px;
+      padding: 8px 0;
+      border: 0;
+      background: transparent;
+      color: var(--gold-dark);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.2;
+      box-shadow: none;
+      transition: transform 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .list-heading {
+      padding: 12px 0 16px;
+      text-align: center;
+    }
+
+    .list-heading h1 {
+      margin: 0 0 6px;
+      color: var(--gold-dark);
+      font-size: 22px;
+      line-height: 1.3;
+    }
+
+    .list-heading p {
+      margin: 0;
+      color: var(--text-light);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .stage-separator {
+      margin: 20px 0 10px;
+      padding: 12px 16px;
+      border: 1px solid rgba(200, 147, 58, 0.20);
+      border-radius: 12px;
+      background: var(--bg-etapa);
+      color: var(--gold-dark);
+      text-align: center;
+      box-shadow: 0 1px 10px rgba(160, 114, 42, 0.05);
+    }
+
+    .stage-separator strong {
+      display: block;
+      margin-bottom: 2px;
+      color: var(--gold-dark);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      line-height: 1.4;
+    }
+
+    .stage-separator strong::first-letter {
+      opacity: 0.6;
+    }
+
+    .stage-separator span {
+      display: block;
+      margin-top: 2px;
+      color: var(--text-light);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .days-list {
+      display: grid;
+      gap: 8px;
+      padding-bottom: 26px;
+    }
+
+    .day-card {
+      display: grid;
+      grid-template-columns: 36px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      width: 100%;
+      min-height: 0;
+      height: auto;
+      padding: 14px 16px;
+      border: 0;
+      border-radius: 14px;
+      background: #FFFFFF;
+      color: var(--text-dark);
+      cursor: pointer;
+      text-align: left;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .day-card:focus-visible {
+      box-shadow: var(--shadow-soft), var(--focus);
+    }
+
+    .day-card__number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #C9933A, #A0722A);
+      color: #FFFFFF;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    .day-card__title {
+      color: var(--text-dark);
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+
+    .day-card__play {
+      color: var(--gold-light);
+      font-size: 14px;
+      opacity: 0.7;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      width: 100vw;
+      height: 100vh;
+      overflow-y: auto;
+      background: #F9F5EE;
+      opacity: 0;
+      transform: translateY(8px);
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
+    }
+
+    .modal.is-open {
+      opacity: 1;
+      transform: translateY(0);
+      visibility: visible;
+      pointer-events: auto;
+      transition-delay: 0s;
+    }
+
+    .modal__inner {
+      width: 100%;
+      max-width: 480px;
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: 0 20px 28px;
+    }
+
+    .modal-top {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 40px;
+      gap: 10px;
+      align-items: center;
+      min-height: 56px;
+      margin: 0 -20px 18px;
+      padding: 16px 20px;
+      background: rgba(249, 245, 238, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(237, 224, 200, 0.72);
+    }
+
+    .modal-stage {
+      justify-self: center;
+      margin-left: 40px;
+      color: var(--text-light);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      line-height: 1.4;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .close-button {
+      justify-self: end;
+      min-width: 40px;
+      min-height: 40px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--text-light);
+      cursor: pointer;
+      font-size: 0;
+      font-weight: 400;
+      line-height: 1;
+      box-shadow: none;
+      transition: transform 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .close-button::before {
+      content: "✕";
+      font-size: 20px;
+    }
+
+    .modal-title {
+      padding: 4px 0 20px;
+      text-align: center;
+    }
+
+    .modal-title .eyebrow {
+      margin: 0 0 8px;
+      color: var(--gold-mid);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+
+    .modal-title h2 {
+      margin: 0 auto;
+      max-width: 340px;
+      color: var(--text-dark);
+      font-size: 22px;
+      line-height: 1.3;
+    }
+
+    .player {
+      padding: 20px;
+      border-radius: 16px;
+      background: #FFFFFF;
+      box-shadow: var(--shadow-player);
+    }
+
+    .icon-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .play-button {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #C9933A, #A0722A);
+      color: #FFFFFF;
+      font-size: 20px;
+      line-height: 1;
+      box-shadow: 0 4px 14px rgba(160, 114, 42, 0.26);
+    }
+
+    .progress {
+      position: relative;
+      width: 100%;
+      height: 15px;
+      margin: 2px 0 9px;
+      padding: 6px 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .progress__track {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 6px;
+      height: 3px;
+      overflow: hidden;
+      border-radius: 2px;
+      background: #E8D5B0;
+    }
+
+    .progress__fill {
+      display: block;
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--gold-mid);
+      transition: width 0.12s linear;
+    }
+
+    .player__meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      color: var(--text-light);
+      font-size: 12px;
+      font-variant-numeric: tabular-nums;
+      line-height: 1.4;
+    }
+
+    .speed-button {
+      min-width: 0;
+      min-height: 0;
+      padding: 2px 8px;
+      border: 1px solid var(--gold-light);
+      border-radius: 6px;
+      background: transparent;
+      color: var(--text-mid);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1.4;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .decorative {
+      height: 1px;
+      margin: 20px 0;
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+      color: transparent;
+      font-size: 0;
+      text-align: center;
+    }
+
+    .content-block {
+      margin-bottom: 24px;
+    }
+
+    .label {
+      display: block;
+      margin: 0 0 12px;
+      color: var(--text-light);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      line-height: 1.5;
+      text-transform: uppercase;
+    }
+
+    .verse {
+      margin: 0;
+      padding: 12px 16px;
+      border-left: 3px solid var(--gold-mid);
+      border-radius: 0 8px 8px 0;
+      background: #FDF6E9;
+      color: var(--text-dark);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 15px;
+      font-style: italic;
+      font-weight: normal;
+      line-height: 1.7;
+    }
+
+    .prayer-text {
+      color: var(--text-dark);
+      font-size: 16px;
+      line-height: 1.85;
+    }
+
+    .prayer-text p {
+      margin: 0 0 16px;
+    }
+
+    .declaration {
+      margin: 24px 0;
+      padding: 20px;
+      border-radius: 14px;
+      background: var(--gold-pale);
+      color: var(--gold-dark);
+      text-align: center;
+    }
+
+    .declaration .label {
+      margin-bottom: 10px;
+      color: var(--gold-dark);
+    }
+
+    .declaration p {
+      margin: 0;
+      color: var(--gold-dark);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 15px;
+      font-style: italic;
+      font-weight: normal;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .modal-nav {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 2px 0 10px;
+    }
+
+    .nav-button {
+      min-height: 44px;
+      padding: 10px 8px;
+      border: 1.5px solid rgba(200, 147, 58, 0.35);
+      border-radius: 10px;
+      background: transparent;
+      color: var(--gold-dark);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.25;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .nav-button:disabled {
+      cursor: not-allowed;
+      opacity: 0.3;
+    }
+
+    .nav-button.is-highlighted:not(:disabled) {
+      border-color: transparent;
+      background: linear-gradient(135deg, #C9933A, #A0722A);
+      color: #FFFFFF;
+      box-shadow: 0 4px 14px rgba(160, 114, 42, 0.24);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (min-width: 481px) {
+      .app,
+      .modal__inner {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .modal-top {
+        margin-left: -24px;
+        margin-right: -24px;
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <section class="screen is-active" id="home-screen" aria-labelledby="home-title">
+      <header class="brand" aria-label="Mães da Oração">
+        <img class="brand__logo" src="Logo/logo.png.png" alt="Logo Mães da Oração">
+        <p class="brand__text">Mães da Oração</p>
+      </header>
+
+      <section class="hero">
+        <h1 id="home-title">Sua jornada de intercessão começa aqui</h1>
+        <p>Clique no devocional abaixo para ouvir e acompanhar cada oração guiada</p>
+      </section>
+
+      <article class="devotional-card">
+        <span class="devotional-card__badge">21 dias</span>
+        <img class="devotional-card__cover" src="Capa Devocional/Capa.png" alt="Capa do Devocional Filho Restaurado">
+        <div class="devotional-card__content">
+          <h2>Devocional Filho Restaurado</h2>
+          <p>21 Dias de Oração Guiada</p>
+          <button class="button button--gold" id="open-prayers" type="button">▶ Acessar as Orações</button>
+        </div>
+      </article>
+
+      <div class="pdf-action">
+        <a class="button button--outline" href="Entregável PDF/Devocional Filho Restaurado - 21 Dias.pdf" target="_blank" rel="noopener">⬇ Baixar Devocional em PDF</a>
+      </div>
+
+      <footer class="footer">© Mães da Oração — Todos os direitos reservados</footer>
+    </section>
+
+    <section class="screen" id="prayers-screen" aria-labelledby="prayers-title">
+      <div class="top-row">
+        <button class="back-button" id="back-home" type="button">← Voltar</button>
+        <header class="brand" aria-label="Mães da Oração">
+          <img class="brand__logo brand__logo--small" src="Logo/logo.png.png" alt="Logo Mães da Oração">
+        </header>
+      </div>
+
+      <section class="list-heading">
+        <h1 id="prayers-title">Orações Guiadas</h1>
+        <p>Toque em um dia para ouvir e acompanhar</p>
+      </section>
+
+      <div class="days-list" id="days-list"></div>
+    </section>
+  </main>
+
+  <section class="modal" id="prayer-modal" aria-hidden="true" aria-labelledby="modal-heading" role="dialog">
+    <div class="modal__inner" id="modal-scroll">
+      <div class="modal-top">
+        <div class="modal-stage" id="modal-stage">ETAPA</div>
+        <button class="close-button" id="close-modal" type="button">✕ Fechar</button>
+      </div>
+
+      <section class="modal-title">
+        <p class="eyebrow" id="modal-day">DIA 01</p>
+        <h2 id="modal-heading">Título da oração</h2>
+      </section>
+
+      <section class="player" aria-label="Player de áudio da oração">
+        <button class="icon-button play-button" id="play-toggle" type="button" aria-label="Reproduzir oração">▶</button>
+        <button class="progress" id="progress-button" type="button" aria-label="Avançar ou voltar no áudio">
+          <span class="progress__track">
+            <span class="progress__fill" id="progress-fill"></span>
+          </span>
+        </button>
+        <div class="player__meta">
+          <span id="time-display">0:00 / 0:00</span>
+          <button class="speed-button" id="speed-toggle" type="button">1x</button>
+        </div>
+        <audio id="audio-player" preload="metadata"></audio>
+      </section>
+
+      <div class="decorative" aria-hidden="true">── ✦ ──</div>
+
+      <section class="content-block">
+        <strong class="label">VERSÍCULO ÂNCORA</strong>
+        <p class="verse" id="modal-verse"></p>
+      </section>
+
+      <section class="content-block">
+        <strong class="label">ORAÇÃO GUIADA</strong>
+        <div class="prayer-text" id="modal-prayer"></div>
+      </section>
+
+      <section class="declaration">
+        <strong class="label">DECLARAÇÃO</strong>
+        <p id="modal-declaration"></p>
+      </section>
+
+      <nav class="modal-nav" aria-label="Navegação entre dias">
+        <button class="nav-button" id="previous-day" type="button">← Dia anterior</button>
+        <button class="nav-button" id="next-day" type="button">Próximo dia →</button>
+      </nav>
+    </div>
+  </section>
+
+  <script src="oracoes_texto.js"></script>
+  <script>
+    const stages = [
+      { start: 1, end: 7, title: "ETAPA 1 • A MÃE", days: "Dias 1 ao 7" },
+      { start: 8, end: 14, title: "ETAPA 2 • O FILHO", days: "Dias 8 ao 14" },
+      { start: 15, end: 21, title: "ETAPA 3 • A RESTAURAÇÃO", days: "Dias 15 ao 21" }
+    ];
+
+    const audioFiles = {
+      1: "Orações Áudio/DIA 1 — A dor que você carrega em silêncio.WAV",
+      2: "Orações Áudio/DIA 2 — Soltando o controle, abraçando a fé.WAV",
+      3: "Orações Áudio/DIA 3 — Quebrando a culpa que paralisa.WAV",
+      4: "Orações Áudio/DIA 4 — Renovando sua força para continuar.WAV",
+      5: "Orações Áudio/DIA 5 — Reacendendo a esperança.WAV",
+      6: "Orações Áudio/DIA 6 — Sua identidade como mãe intercessora.WAV",
+      7: "Orações Áudio/DIA 7 — Selando o altar da sua casa.WAV",
+      8: "Orações Áudio/DIA 8 — A mente que precisa ser renovada.WAV",
+      9: "Orações Áudio/DIA 9 — O coração endurecido.WAV",
+      10: "Orações Áudio/DIA 10 — As influências ao redor dele.WAV",
+      11: "Orações Áudio/DIA 11 — A identidade que ele perdeu.WAV",
+      12: "Orações Áudio/DIA 12 — O propósito que Deus tem para ele.WAV",
+      13: "Orações Áudio/DIA 13 — A proteção sobre sua vida.WAV",
+      14: "Orações Áudio/DIA 14 — Quebrando o orgulho que separa.WAV",
+      15: "Orações Áudio/DIA 15 — O primeiro passo de volta.WAV",
+      16: "Orações Áudio/DIA 16 — A reconciliação entre nós dois.WAV",
+      17: "Orações Áudio/DIA 17 — Quebrando o silêncio e a distância.WAV",
+      18: "Orações Áudio/DIA 18 — O reencontro com Deus.WAV",
+      19: "Orações Áudio/DIA 19 — A família reunida.WAV",
+      20: "Orações Áudio/DIA 20 — Gratidão antecipada — pela fé.WAV",
+      21: "Orações Áudio/DIA 21 — Declaração final — Filho Restaurado.WAV"
+    };
+
+    const homeScreen = document.getElementById("home-screen");
+    const prayersScreen = document.getElementById("prayers-screen");
+    const daysList = document.getElementById("days-list");
+    const modal = document.getElementById("prayer-modal");
+    const modalScroll = document.getElementById("modal-scroll");
+    const audio = document.getElementById("audio-player");
+    const playToggle = document.getElementById("play-toggle");
+    const progressButton = document.getElementById("progress-button");
+    const progressFill = document.getElementById("progress-fill");
+    const timeDisplay = document.getElementById("time-display");
+    const speedToggle = document.getElementById("speed-toggle");
+    const previousDay = document.getElementById("previous-day");
+    const nextDay = document.getElementById("next-day");
+    const speeds = [1, 1.5, 2];
+
+    let currentIndex = 0;
+    let currentSpeedIndex = 0;
+
+    function getStageByDay(day) {
+      return stages.find((stage) => day >= stage.start && day <= stage.end);
+    }
+
+    function padDay(day) {
+      return String(day).padStart(2, "0");
+    }
+
+    function formatTime(seconds) {
+      if (!Number.isFinite(seconds) || seconds < 0) {
+        return "0:00";
+      }
+
+      const minutes = Math.floor(seconds / 60);
+      const remainingSeconds = Math.floor(seconds % 60);
+      return `${minutes}:${String(remainingSeconds).padStart(2, "0")}`;
+    }
+
+    function setScreen(screenName) {
+      const showPrayers = screenName === "prayers";
+      homeScreen.classList.toggle("is-active", !showPrayers);
+      prayersScreen.classList.toggle("is-active", showPrayers);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function renderDays() {
+      const fragment = document.createDocumentFragment();
+
+      stages.forEach((stage) => {
+        const separator = document.createElement("div");
+        separator.className = "stage-separator";
+        separator.innerHTML = `<strong>✦ ${stage.title} ✦</strong><span>${stage.days}</span>`;
+        fragment.appendChild(separator);
+
+        oracoes
+          .filter((item) => item.dia >= stage.start && item.dia <= stage.end)
+          .forEach((item) => {
+            const index = oracoes.findIndex((prayer) => prayer.dia === item.dia);
+            const card = document.createElement("button");
+            card.className = "day-card";
+            card.type = "button";
+            card.innerHTML = `
+              <span class="day-card__number">${padDay(item.dia)}</span>
+              <span class="day-card__title">${item.titulo}</span>
+              <span class="day-card__play" aria-hidden="true">▶</span>
+            `;
+            card.addEventListener("click", () => openModal(index));
+            fragment.appendChild(card);
+          });
+      });
+
+      daysList.appendChild(fragment);
+    }
+
+    function resetAudio() {
+      audio.pause();
+      audio.currentTime = 0;
+      playToggle.textContent = "▶";
+      playToggle.setAttribute("aria-label", "Reproduzir oração");
+      progressFill.style.width = "0%";
+      timeDisplay.textContent = "0:00 / 0:00";
+      nextDay.classList.remove("is-highlighted");
+    }
+
+    function setAudioSource(item) {
+      const sources = [audioFiles[item.dia], item.audio].filter(Boolean);
+      audio.innerHTML = "";
+
+      sources.forEach((source) => {
+        const sourceElement = document.createElement("source");
+        sourceElement.src = encodeURI(source);
+        if (source.toLowerCase().endsWith(".wav")) {
+          sourceElement.type = "audio/wav";
+        } else if (source.toLowerCase().endsWith(".mp3")) {
+          sourceElement.type = "audio/mpeg";
+        }
+        audio.appendChild(sourceElement);
+      });
+
+      audio.load();
+    }
+
+    function renderPrayer(index) {
+      currentIndex = index;
+      const item = oracoes[currentIndex];
+      const stage = getStageByDay(item.dia);
+
+      resetAudio();
+      document.getElementById("modal-stage").textContent = stage ? stage.title : item.etapa;
+      document.getElementById("modal-day").textContent = `DIA ${padDay(item.dia)}`;
+      document.getElementById("modal-heading").textContent = item.titulo;
+      document.getElementById("modal-verse").textContent = item.versiculo;
+      document.getElementById("modal-prayer").innerHTML = item.oracao
+        .split(/\n\s*\n/)
+        .map((paragraph) => `<p>${paragraph.trim()}</p>`)
+        .join("");
+      document.getElementById("modal-declaration").textContent = item.declaracao;
+      previousDay.disabled = currentIndex === 0;
+      nextDay.disabled = currentIndex === oracoes.length - 1;
+      setAudioSource(item);
+      modal.scrollTo({ top: 0, behavior: "auto" });
+      modalScroll.scrollTo({ top: 0, behavior: "auto" });
+    }
+
+    function openModal(index) {
+      resetAudio();
+      renderPrayer(index);
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+      setTimeout(() => modal.scrollTo({ top: 0, behavior: "auto" }), 0);
+    }
+
+    function closeModal() {
+      resetAudio();
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+    }
+
+    function updateProgress() {
+      const duration = audio.duration || 0;
+      const currentTime = audio.currentTime || 0;
+      const percent = duration ? (currentTime / duration) * 100 : 0;
+      progressFill.style.width = `${Math.min(percent, 100)}%`;
+      timeDisplay.textContent = `${formatTime(currentTime)} / ${formatTime(duration)}`;
+    }
+
+    document.getElementById("open-prayers").addEventListener("click", () => setScreen("prayers"));
+    document.getElementById("back-home").addEventListener("click", () => setScreen("home"));
+    document.getElementById("close-modal").addEventListener("click", closeModal);
+
+    playToggle.addEventListener("click", async () => {
+      if (audio.paused) {
+        try {
+          await audio.play();
+        } catch (error) {
+          playToggle.textContent = "▶";
+        }
+      } else {
+        audio.pause();
+      }
+    });
+
+    progressButton.addEventListener("click", (event) => {
+      if (!audio.duration) {
+        return;
+      }
+
+      const rect = progressButton.getBoundingClientRect();
+      const ratio = Math.min(Math.max((event.clientX - rect.left) / rect.width, 0), 1);
+      audio.currentTime = ratio * audio.duration;
+      updateProgress();
+    });
+
+    speedToggle.addEventListener("click", () => {
+      currentSpeedIndex = (currentSpeedIndex + 1) % speeds.length;
+      audio.playbackRate = speeds[currentSpeedIndex];
+      speedToggle.textContent = `${speeds[currentSpeedIndex]}x`;
+    });
+
+    previousDay.addEventListener("click", () => {
+      if (currentIndex > 0) {
+        renderPrayer(currentIndex - 1);
+      }
+    });
+
+    nextDay.addEventListener("click", () => {
+      if (currentIndex < oracoes.length - 1) {
+        renderPrayer(currentIndex + 1);
+      }
+    });
+
+    audio.addEventListener("play", () => {
+      playToggle.textContent = "❚❚";
+      playToggle.setAttribute("aria-label", "Pausar oração");
+    });
+
+    audio.addEventListener("pause", () => {
+      playToggle.textContent = "▶";
+      playToggle.setAttribute("aria-label", "Reproduzir oração");
+    });
+
+    audio.addEventListener("loadedmetadata", updateProgress);
+    audio.addEventListener("timeupdate", updateProgress);
+    audio.addEventListener("ended", () => {
+      playToggle.textContent = "▶";
+      if (currentIndex < oracoes.length - 1) {
+        nextDay.classList.add("is-highlighted");
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && modal.classList.contains("is-open")) {
+        closeModal();
+      }
+    });
+
+    if (Array.isArray(oracoes) && oracoes.length) {
+      renderDays();
+    } else {
+      daysList.innerHTML = "<p>Não foi possível carregar as orações.</p>";
+    }
+  </script>
+</body>
+</html>
